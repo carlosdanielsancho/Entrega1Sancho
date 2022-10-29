@@ -1,0 +1,94 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+{% block our_blog_title %}
+Artist list
+{% endblock %}
+
+{% block our_blog_header %}
+<header class="masthead" style="background-image: url('/static/home/assets/img/about-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-15 col-lg-16 col-xl-14">
+                <div class="site-heading">
+                    <h1>Listado de artistas</h1>
+                    <span class="subheading">Our blog</span>
+                </div>
+            </div>
+        </div>
+        <a class="button_custom" href="{% url 'artist:artist-add' %}">Cargar nuevo artista</a>
+    </div>
+</header>
+{% endblock %}
+
+
+{% block our_blog_content %}
+{% for artist in artist_list %}
+    <!-- Post preview-->
+    <div class="post-preview">
+        <a href="{% url 'artist:artist-detail' artist.id %}">
+            <h2 class="post-title">Artista {{ artist.name }}</h2>
+            <h3 class="post-subtitle">Género: {{ artist.genre }}</h3>
+            <h3 class="post-subtitle">Actividad: {{ artist.active }}</h3>
+        </a>
+        <p class="post-meta">
+            Creado por
+            <a href="#!">Nuestro Blog</a> 
+            en {{ artist.created_at }}
+        </p>
+    </div>
+    <!-- Divider-->
+    <hr class="my-4" />
+{% endfor %}
+
+<!--Pagination-->
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if artist_list.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ artist_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if artist_list.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ artist_list.number }} of {{ artist_list.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if artist_list.has_next %}
+                <a href="?page={{ artist_list.next_page_number }}">next</a> |
+                <a href="?page={{ artist_list.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+<!--end of Pagination-->
+
+<!--Pagination Class Based Views-->
+{% if is_paginated %}
+<div class="container p-4">
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a> |
+                <a href="?page={{ artist_list.previous_page_number }}">previous</a> |
+            {% endif %}
+
+            {% if page_obj.paginator.num_pages > 1 %}
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} |
+            </span>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a> |
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+{% endif %}
+<!--end of Pagination-->
+
+{% endblock %}
