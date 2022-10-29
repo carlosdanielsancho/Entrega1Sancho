@@ -33,10 +33,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'course:course-list' %}">Cursos</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'course:homework-list' %}">Entregables</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'student:student-list' %}">Estudiantes</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'profesor:profesor-list' %}">Profesores</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'artist:artist-list' %}">Artistas</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'album:album-list' %}">Albumes</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'reviewer:reviewer-list' %}">Reseñas</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -48,8 +48,8 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                            <h1>Nuestro Blog</h1>
+                            <span class="subheading">Un blog sobre lo que nos gusta</span>
                         </div>
                     </div>
                 </div>
@@ -80,10 +80,10 @@
                     {% block my_blog_content %}
 
                     <!-- Buscador -->
-                    <h2>Buscador de cursos</h2>
+                    <h2>Buscador de artistas</h2>
                     <form action="{% url 'home:search' %}" method="GET">
                         <div>
-                            <input type="text" name="search_param" id="course_code_or_name" placeholder="Buscar.."
+                            <input type="text" name="search_param" id="artist_name" placeholder="Buscar.."
                             {% if search_param %} value="{{ search_param }}" {% endif %}
                             >
                             <input type="submit" value="Buscar">
@@ -94,18 +94,17 @@
                     <hr class="my-4" />
 
                     <!-- Si hay resultados en el buscador los presenta -->
-                    {% if courses %}
-                    {% for course in courses %}
+                    {% if artists %}
+                    {% for artist in artists %}
                         <!-- Post preview-->
                         <div class="post-preview">
-                            <a href="{% url 'course:course-detail' course.id %}">
-                                <h2 class="post-title">Este es el curso de {{ course.name }}</h2>
-                                <h3 class="post-subtitle">Que tiene el código: {{ course.code }}</h3>
+                            <a href="{% url 'artist:artist-detail' artist.id %}">
+                                <h2 class="post-title">Este es el artista {{ artist.name }}</h2>
                             </a>
                             <p class="post-meta">
                                 Creado por
-                                <a href="#!">Start Bootstrap</a> 
-                                en {{ course.created_at }}
+                                <a href="#!">Nuestro blog</a> 
+                                en {{ artist.created_at }}
                             </p>
                         </div>
                         <!-- Divider-->
@@ -147,7 +146,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2022</div>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Nuestro Blog 2022</div>
                     </div>
                 </div>
             </div>

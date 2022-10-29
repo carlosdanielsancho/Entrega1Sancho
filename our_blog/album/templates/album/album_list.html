@@ -1,0 +1,35 @@
+{% extends "home/index.html" %}
+{% load static %}
+
+{% block our_blog_title %}
+Album
+{% endblock %}
+
+{% block our_blog_header %}
+    <header class="masthead" style="background-image: url('/static/home/assets/img/post-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-15 col-lg-16 col-xl-14">
+                    <div class="site-heading">
+                        <h1>Listado de Albumes</h1>
+                        <span class="subheading">Nuestro blog</span>
+                    </div>
+                </div>
+            </div>
+            <a class="button_custom" href="{% url 'album:album-add' %}">Crear nuevo Album</a>
+        </div>
+    </header>
+{% endblock %}
+
+{% block our_blog_content %}
+    {% for album in albums %}
+        <!-- Post preview-->
+        <div class="post-preview">
+            <h2 class="post-title">Este es el disco: {{ album.title }} de {{ album.performer}}</h2>
+            <h3 class="post-subtitle">Lanzamiento: {{ album.release }}</h3>
+            <h3 class="post-subtitle">Género: {{ album.genre }}</h3>
+        </div>
+        <!-- Divider-->
+        <hr class="my-4" />
+    {% endfor %}
+{% endblock %}
