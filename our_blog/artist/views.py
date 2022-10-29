@@ -1,12 +1,18 @@
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator
 from django.forms.models import model_to_dict
 from django.shortcuts import render
-
-# Create your views here.
+from django.urls import reverse_lazy
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from artist.forms import ArtistForm
 from artist.models import Artist
+
+# Create your views here.
+
 
 def get_artists(request):
     artists = Artist.objects.all()
@@ -124,16 +130,6 @@ def artist_delete(request, pk: int):
         context=context_dict,
         template_name="artist/artist_confirm_delete.html",
     )
-
-
-
-from django.core.exceptions import ValidationError
-from django.urls import reverse_lazy
-from django.views.generic import ListView
-from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
-from artist.models import Artist
 
 
 class ArtistListView(ListView):

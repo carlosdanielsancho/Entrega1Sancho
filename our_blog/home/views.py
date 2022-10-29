@@ -20,10 +20,10 @@ def search(request):
     if search_param:
         query = Q(name__contains=search_param)
         query.add(Q(code__contains=search_param), Q.OR)
-        courses = Course.objects.filter(query)
+        artists = Artist.objects.filter(query)
         context_dict.update(
             {
-                "courses": courses,
+                "artists": artists,
                 "search_param": search_param,
             }
         )
