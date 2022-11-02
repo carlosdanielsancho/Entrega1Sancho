@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 
-from reviewer.models import reviewer
+from reviewer.models import Reviewer
 
 # Create your views here.
 
