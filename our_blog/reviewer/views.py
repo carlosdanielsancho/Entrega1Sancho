@@ -19,7 +19,7 @@ def create_reviewer(request, name: str, last_name: str):
 
 
 def reviewers(request):
-    reviewers = reviewer.objects.all()
+    reviewers = reviewers.objects.all()
 
     context_dict = {"reviewers": reviewers}
 
